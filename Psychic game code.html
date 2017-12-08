@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>psycic game</title>
+</head>
+<body>
+	<div id = "game">
+		<h1>The Psychic Game</h1>
+		<h3>Guess a letter to start...</h3>
+	</div>
+
+	<script type="text/javascript">
+		
+		var compChoice = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+		var wins = 0;
+		var losses = 0;
+		var guessLeft = 9;
+		var guessSoFar = [];
+		var compLetter = "";
+
+		function randomGen() {
+			compLetter = compChoice[Math.floor(Math.random() * compChoice.length)];
+		};
+
+		randomGen();
+
+		document.onkeyup = function(event){
+
+		
+
+			var userGuess = event.key;
+			
+
+			//var compLetter = compChoice[Math.floor(Math.random() * compChoice.length)];
+
+
+			if (guessLeft > 0){
+				if (userGuess != compLetter){
+					guessLeft--;
+					guessSoFar.push(userGuess);
+				}
+				else if (userGuess == compLetter){
+					(guessLeft - 1);
+					wins++
+					alert("You've Won!");
+					guessSoFar = [];
+					guessLeft = 9;
+					randomGen();
+				
+					
+					
+				}
+			if (guessLeft == 0){
+				losses++;
+				alert("You fucking suck!");
+				guessSoFar = [];
+				guessLeft = 9;
+				randomGen();
+				
+				
+			};	
+
+			};	
+
+			var html =
+				"<h1>The Psychic Game</h1>" +
+				"<p>Guess what letter I'm thinking of!</p>" +
+          		"<p>wins: " + wins + "</p>" +
+         		"<p>losses: " + losses + "</p>" +
+          		"<p>Guesses Left: " + guessLeft + "</p>" +
+          		"<p>Guesses so far: " + guessSoFar + "</p>";
+
+      document.querySelector("#game").innerHTML = html;
+		};
+
+
+	</script>
+
+</body>
+</html>
